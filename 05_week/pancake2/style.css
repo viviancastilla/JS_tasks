@@ -1,0 +1,44 @@
+body{
+    background-color: darkgray;
+    top: 10;
+    text-align: right ;
+    color: white;
+    font-family:fantasy;
+}
+
+.positioned-image{
+    width: 60vw;
+    height: 50vw;
+    position: absolute;
+    left: 0;
+}
+
+.price-banner{
+    border-radius: 50%;
+    background-color: pink;
+    height: 100px;
+    width: 100px;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 750px;
+    top: 10px;
+}
+
+h3{
+    margin-top: 15px;
+}
+
+input[type="checkbox"]{
+    margin-right: 5px;
+    border-radius: 50px;
+}
+
+select,
+label{
+    display:block;
+    margin-top: 10px;
+}
