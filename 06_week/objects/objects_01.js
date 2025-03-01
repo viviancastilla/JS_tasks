@@ -5,6 +5,7 @@ const library = [
     { title: 'Little red riding hood' , author: 'Charles Perrault', yearPublished:1697 },
 ]
 //Task 2
+console.log(library[0].title);
 library[0].genre = ["fantasy", "adventure", "classic"]
 
 // Task 3, both do the same thing)
@@ -12,6 +13,7 @@ library[0]["isAvailable"] = true
 /*if(library[0].title === 'Alice in wonderland'){
         library[0].isAvailable = true;
     }*/
+console.log(library[0].isAvailable);
 
 //Task 4
 function Book(title, author, yearPublished, genres){
@@ -22,6 +24,7 @@ function Book(title, author, yearPublished, genres){
 }
 const newBook = new Book('Frankenstein', 'Mary Shelley', 1818, ['science fiction', 'horror'] );
 library.push(newBook);
+
 
 //Task 5
 function createBook(title, author, yearPublished, genres) {
@@ -43,8 +46,28 @@ console.log(jsonString);
 const parsedLibrary = JSON.parse(jsonString);
 console.log(parsedLibrary[0].title);
 
-console.log(library[0].title);
+//Task 7
+const students = [
+    {name: 'Vivian', age: 21, grade: 95},
+    {name: 'Barbara', age: 24, grade: 93},
+    {name: 'Jaime', age: 25, grade: 88},
+];
+for(let i = 0; i < 3; i++){
+    if(students[i].grade > 90){
+        console.log(students[i].name);
+    }
+}
+
+//Task 8
+let car = {
+    brand: 'audi',
+    model: 'a3',
+    year: '2023',
+    isElectric: 'no'
+}
+for(let i in car)
+    console.log()
+
 console.log(library[1].yearPublished = 1980);
-console.log(library[0].isAvailable);
 console.log(library);
 
