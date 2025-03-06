@@ -63,11 +63,101 @@ let car = {
     brand: 'audi',
     model: 'a3',
     year: '2023',
-    isElectric: 'no'
+    isElectric: false
 }
-for(let i in car)
-    console.log()
+function carInfo(){
+    if( car.isElectric){
+        console.log("This car is eco-friendly");
+    }else{
+        console.log("This car has true fuel.");
+    }
+}
+carInfo();
 
-console.log(library[1].yearPublished = 1980);
-console.log(library);
+//Task 9
+let moviesArr = [
+    {
+        title: "Star wars",
+        director: "J.J. Abrams",
+        rating: 8.7
+    },
+    {
+        title: "Harry Potter",
+        director: "Mike Newell",
+        rating: 9
+    },
+    {
+        title: "Madam web",
+        director: "S.J. Clarkson",
+        rating: 4
+    }
+]
+function highRating(){
+    for(let movie of moviesArr){
+        if(movie.rating > 8){
+            console.log(movie.title);
+        }
+    }
+}
+highRating();
+
+//Task 10
+function findOldestCar(){
+    let carYear = Infinity;
+    let moreCars = [
+        {
+            brand: 'audi',
+            model: 'a3',
+            year: 2023,
+            isElectric: true
+        },
+        {
+            brand: 'nissan',
+            model: 'sentra',
+            year: 2020,
+            isElectric: false
+        },
+        {
+            brand: 'susuki',
+            model: 'fronx',
+            year: 2015,
+            isElectric: false
+        }
+    ]
+    for(let i = 0; i < moreCars.length; i++){
+        if(moreCars[i].year < carYear){
+            carYear = moreCars[i].year;
+        };
+    }
+    return carYear;
+}
+console.log(findOldestCar());
+
+//Task 11
+let userProfiles = [
+    {username: "aUserName",
+    email: "school.email@gmail.com",
+    isAdmin: true},
+    {username: "anotherUser",
+    email: "school@gmail.com",
+    isAdmin: false},
+    {username: "andOneMore",
+    email: "email@gmail.com",
+    isAdmin: true},
+]
+function admin(){
+    let isAdmin = [];
+    for(let i = 0; i < userProfiles.length; i++){
+        if(userProfiles[i].isAdmin === true){
+            isAdmin.push(userProfiles[i].username);
+        }
+    }
+    return isAdmin;
+}
+console.log(admin());
+
+//Task 12
+let orders = []
+
+
 
