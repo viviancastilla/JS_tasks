@@ -14,6 +14,8 @@
         </div>
 
     </div>
+
+    <div class="form-container">
     <h2> Customize your Pancake</h2>
 
     <form id="pancakeForm">
@@ -25,47 +27,35 @@
         
 
         <!--Making the Panceke-->
-        <div>
             <label for="type">Choose your pancake type:</label>
                 <select id="type">
                     <option data-price="5">Classic - 5€</option>
                     <option data-price="6">Chocolate - 6€</option>
                     <option data-price="7">Blueberry -7€</option>
                 </select>
-        </div>
     
         <!-- Toppings -->
          <h3>Select your toppings (1€ each):</h3>
          <div>
-            <label
-            ><input type="checkbox" class="topping" data-price="1" /> Nuts
-           </label>
+            <label><input type="checkbox" class="topping" data-price="1" /> Nuts</label>
         </div>
          
         <div>
-            <label
-            ><input type="checkbox" class="topping" data-price="1" /> Bananas
-           </label>
+            <label><input type="checkbox" class="topping" data-price="1" /> Bananas</label>
         </div>
 
         <div>
-            <label
-            ><input type="checkbox" class="topping" data-price="1" /> Syrup
-           </label>
+            <label><input type="checkbox" class="topping" data-price="1" /> Syrup</label>
         </div>
 
         <!-- Extras -->
          <h3>Add extras:</h3>
          <div>
-            <label
-            ><input type="checkbox" class="extra" data-price="2" /> Whipped Cream - 2€
-           </label>
+            <label><input type="checkbox" class="extra" data-price="2" /> Whipped Cream - 2€</label>
         </div>
          
         <div>
-            <label
-            ><input type="checkbox" class="extra" data-price="1" /> Ice Cream - 3€
-           </label>
+            <label><input type="checkbox" class="extra" data-price="1" /> Ice Cream - 3€</label>
         </div>
 
         <!-- Delivery Method -->
@@ -79,7 +69,7 @@
                     data-price="0" 
                     checked/>
                     Eat In
-            </label>
+                </label>
         </div>
          
             <label>
@@ -89,8 +79,7 @@
                     class="delivery" 
                     data-price="0" />
                     Pick up
-            </label>
-        
+                </label>
         <div>
             <label>
                 <input 
@@ -115,9 +104,10 @@
             <p id="summaryText">Your order details will appear here.</p>
         </div>
     </div>
+    </div>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js" ></script>
 
 </body>
 </html>
