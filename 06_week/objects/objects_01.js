@@ -75,7 +75,7 @@ function carInfo(){
 carInfo();
 
 //Task 9
-let moviesArr = [
+let moviesArr = [ 
     {
         title: "Star wars",
         director: "J.J. Abrams",
@@ -157,7 +157,88 @@ function admin(){
 console.log(admin());
 
 //Task 12
-let orders = []
+let orders = [
+    {
+        orderId: "79",
+        customerName: "Nea",
+        totalAmount: 39,
+        status: "completed"
+    },
+    {
+        orderId: "80",
+        customerName: "Bennet",
+        totalAmount: 20,
+        status: "pending"
+    }
+]
+function checkOrders(){
+    let completedOrders = [];
+    for(let i = 0; i < orders.length; i++){
+        if(orders[i].status === "completed"){
+            completedOrders.push(orders[i]);
+        }
+    }
+    return completedOrders
+}
+console.log(checkOrders());
 
+//Task 13
+let smartphone = {
+    brand: "iphone",
+    model: 11,
+    batteryLife: "70%",
+    is5GEnabled: false
+}
 
+function check5GCompability(){
+    if(smartphone.is5GEnabled === true){
+        return "This phone supports 5G!"
+    }else{
+        return "This phone does not support 5G";
+    }
+}
+console.log(check5GCompability());
+
+//Task 14
+let fox = {
+    name: "Jonas",
+    age: 21,
+    habitat: "forests"
+}
+function oldOrYoung(){
+    if(fox.age > 3){
+        return "This fox is an adult";
+    }else{
+        return "This fox is young";
+    }
+}
+console.log(oldOrYoung());
+
+//Task 15
+let employees = [
+    {
+        name: "Micha",
+        position: "gardener",
+        salary: 100,
+    },
+    {
+        name: "Jonas",
+        position: "cop",
+        salary: 50,
+    },
+    {
+        name: "Bennet",
+        position: "student",
+        salary: 2,
+    }
+]
+
+function totalSalary(){
+    let salary = 0;
+    for(let i = 0; i < employees.length; i++){
+        salary = employees[i].salary + salary;
+    }
+    return salary;
+}
+console.log(totalSalary());
 
