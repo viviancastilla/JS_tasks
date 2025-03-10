@@ -1,13 +1,32 @@
 //Task 5
 let product = {
-    name: "Barilla",
+    name: "Barilla Pasta",
     price: 3.50,
-    quanity: 2
+    quantity: 1
+}
+function updateDisplay(){
+    let totalPrice = product.price * product.quantity;
+
+    let displayProduct = `
+    Name: ${product.name}<br>
+    Price: €${product.price}<br>
+    Quantity: ${product.quantity}<br>
+    Total Price: € ${totalPrice}`;
+
+    document.getElementById("objectDisplay").innerHTML = displayProduct;
 }
 
-let displayProduct = `Name: ${product.name}<br>Price: ${product.price}<br>Quantity: ${product.quanity}`;
-document.getElementById("objectDisplay").innerHTML = displayText;
 
 function productAmount(){
+    let newQuantity = parseInt(document.getElementById("amount").value);
 
+    if(!isNaN(newQuantity) && newQuantity >= 0){
+        product.quantity = newQuantity;
+        updateDisplay();
+    }else{
+    alert ("Enter a valid quantity");
+    }
 }
+updateDisplay();
+
+document.getElementById("amount").addEventListener("input", productAmount);
