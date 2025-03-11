@@ -2,28 +2,28 @@ let totalPrice = 5;
 
 //Price banner
 function updatedTotalPrice(){
-    let totalPrice = parseFloat(document.getElementById("type").selectedOptions[0].dataset.price);
+    totalPrice = parseFloat(document.getElementById("type").selectedOptions[0].dataset.price);
 
     //topping price
     let toppings = document.querySelectorAll(".topping")
-    for(let i = 0; i < toppings.legth; i++) {
+    for(let i = 0; i < toppings.length; i++) {
         if(toppings[i].checked){
-            totalPrice = parseFloat(topping.dataset.price) + totalPrice;
+            totalPrice = parseFloat(toppings[i].dataset.price) + totalPrice;
         }
     }
 
     //extras price
     let extras = document.querySelectorAll(".extra")
-    for(let i = 0; i < extras; i++){
-        if(extra.checked){
-            totalPrice = parseFloat(extra.dataset.price) + totalPrice;
+    for(let i = 0; i < extras.length; i++){
+        if(extras[i].checked){
+            totalPrice = parseFloat(extras[i].dataset.price) + totalPrice;
         }
     }
        
     //delivery price
-    let selectedDelivery = document.querySelector("input[name='delivery] : checked");
+    let selectedDelivery = document.querySelector("input[name='delivery']:checked");
     if(selectedDelivery){
-        totalPrice = parseFloat(selectedDelivery.dataset.price);
+        totalPrice = parseFloat(selectedDelivery.dataset.price) + totalPrice;
     }
 
     //update displayed price
@@ -34,50 +34,23 @@ function updatedTotalPrice(){
 //eventListener for options
 document.addEventListener("DOMContentLoaded", function() {
     let pancakeTypeSelect = document.getElementById("type");
-    let toppingCheckboxes = document.querySelectorAll(".toppings");
+    let toppingCheckboxes = document.querySelectorAll(".topping");
     let extraCheckboxes = document.querySelectorAll(".extra");
     let deliveryOption = document.querySelectorAll(".delivery");
 
 pancakeTypeSelect.addEventListener("change", updatedTotalPrice);
 
-for(let i = 0; i < toppingCheckboxes; i++){
-    topping[i].addEventListener("change", updatedTotalPrice);
+for(let i = 0; i < toppingCheckboxes.length; i++){
+    toppingCheckboxes[i].addEventListener("change", updatedTotalPrice);
 }
-for(let i = 0; i < extraCheckboxes; i++){
-    extra[i].addEventListener("change", updatedTotalPrice);
+for(let i = 0; i < extraCheckboxes.length; i++){
+    extraCheckboxes[i].addEventListener("change", updatedTotalPrice);
 }
-for(let i = 0; i < 0; i++){
-    delivery[i].addEventListener("change", updatedTotalPrice);
-};
+for(let i = 0; i < deliveryOption.length; i++){
+    deliveryOption[i].addEventListener("change", updatedTotalPrice);
+}
 updatedTotalPrice();
 });
-
-
-//Orderinng process
-/*function price(pancakeType, toppings, extras, delivery){
-    pancakeType = document.getElementById("type").value;
-
-    toppings = document.querySelectorAll(".topping");
-    toppings.forEach(topping => 
-    {
-        if(topping.checked)
-        {
-            totalPrice= parseFloat(topping.dataset.price) + totalPrice;
-        }
-    })
-
-    extras = document.querySelectorAll(".extra");
-    extras.forEach(extra =>
-    {
-        if(extra.checked)
-        {
-             totalPrice= parseFloat(extra.dataset.price) + totalPrice;
-        }
-    })
-
-    delivery = document.querySelector("input[name='delivery']:checked");
-    totalPrice = parseFloat(delivery.dataset.price) + totalPrice;
-}*/
 
 //Final order
 document.getElementById("seeOrder").addEventListener("click", function(){
@@ -97,7 +70,7 @@ document.getElementById("seeOrder").addEventListener("click", function(){
 //selected delivery
     let delivery = document.querySelectorAll("input[name='delivery']:checked");
     if(delivery){
-        order.push("Delivey: " + delivery.parentNOde.textContent.trim());
+        order.push("Delivery: " + delivery.parentNode.textContent.trim());
     }
 
 //display order
