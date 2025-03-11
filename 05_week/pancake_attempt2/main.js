@@ -38,53 +38,106 @@ document.addEventListener("DOMContentLoaded", function() {
     let extraCheckboxes = document.querySelectorAll(".extra");
     let deliveryOption = document.querySelectorAll(".delivery");
 
-pancakeTypeSelect.addEventListener("change", updatedTotalPrice);
+    pancakeTypeSelect.addEventListener("change", updatedTotalPrice);
 
-for(let i = 0; i < toppingCheckboxes.length; i++){
-    toppingCheckboxes[i].addEventListener("change", updatedTotalPrice);
-}
-for(let i = 0; i < extraCheckboxes.length; i++){
-    extraCheckboxes[i].addEventListener("change", updatedTotalPrice);
-}
-for(let i = 0; i < deliveryOption.length; i++){
-    deliveryOption[i].addEventListener("change", updatedTotalPrice);
-}
-updatedTotalPrice();
+    for(let i = 0; i < toppingCheckboxes.length; i++){
+        toppingCheckboxes[i].addEventListener("change", updatedTotalPrice);
+    }
+    for(let i = 0; i < extraCheckboxes.length; i++){
+        extraCheckboxes[i].addEventListener("change", updatedTotalPrice);
+    }
+    for(let i = 0; i < deliveryOption.length; i++){
+        deliveryOption[i].addEventListener("change", updatedTotalPrice);
+    }
+    updatedTotalPrice();
 });
+
+//Where we will store the order object for the cheff
+let orders = [];
+
+//Local sotrage to save the data when refreshing the page
+function saveOrders(){
+    localStorage.setItem("orders", JSON.stringify(orders));
+}
+
+function loadOrders(){
+    let storedOrders = localStorage.getItem("orders");
+     if(storedOrders){
+        orders = JSON.parse(storedOrders);
+     }
+}
+document.addEventListener("DOMContentLoaded", function(){
+    loadOrders();
+});
+
+//Making the orderId to identify the order for the cheff
+let orderId = 0;
+function addOrder(){
+    let newOrderId = orderId;
+    orderId = (orderId + 1) % 100;
+    orderDetails.orderId = newOrderId;
+    orders.push(orderDetails);
+
+    saveOrders();
+
+    window.location.href = "allOrders.html";
+}
 
 //Final order
 document.getElementById("seeOrder").addEventListener("click", function(){
     let order = [];
 
-//customer name
-let customer = document.getElementById("customerName").value;
-order.push("Name: " + customer);
+    //customer name
+    let customer = document.getElementById("customerName").value;
+    order.push("Name: " + customer);
 
-//selected pancake
+    //selected pancake
     let selectedPancake = document.getElementById("type").selectedOptions[0].textContent;
     order.push("Pancake: " + selectedPancake);
     
-// selected toppings
+    // selected toppings
     let toppings = document.querySelectorAll(".topping:checked");
+    let toppingList = [];
     for(let i = 0; i < toppings.length; i++){
+        toppingList.push(toppings[i].value);
         order.push("Topping: " + toppings[i].value);
     }
-// selected extras
+    // selected extras
     let extras = document.querySelectorAll(".extra:checked");
+    let extraList = [];
     for(let i = 0; i < extras.length; i++){
+        extraList.push(extras[i].value);
         order.push("Extra: " + extras[i].value);
     }
 
-//selected delivery
+    //selected delivery
     let delivery = document.querySelector("input[name='delivery']:checked");
-    if(delivery){
+
+    if(!delivery){
+        alert("Plese select a delivery option,");
+        return;
+    }else{
         order.push("Delivery: " + delivery.value);
     }
 
-//display order
+   //display order
     if(order.length > 0){
         document.getElementById("summaryText").innerHTML = "Selected:<br>" + order.join("<br>");
     }else{
         document.getElementById("summaryText").innerText = "No items selected.";
     }
-});   
+
+    //Sending the order to the chef by making an object
+    let orderDetails ={
+        orderId: orderId,
+        customerName: customer,
+        selectedPancake: selectedPancake,
+        toppings: toppingList.length > 0 ? toppingList : ["None"],
+        extras: extraList.length > 0 ? extraList : ["None"],
+        deliveryMethod: deliveryMethod,
+        totalPrice: totalPrice + "€",
+        status: "waiting"
+    };
+
+    addOrder(orderDetails);
+});  
