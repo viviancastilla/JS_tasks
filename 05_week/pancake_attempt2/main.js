@@ -56,27 +56,35 @@ updatedTotalPrice();
 document.getElementById("seeOrder").addEventListener("click", function(){
     let order = [];
 
+//customer name
+let customer = document.getElementById("customerName").value;
+order.push("Name: " + customer);
+
+//selected pancake
+    let selectedPancake = document.getElementById("type").selectedOptions[0].textContent;
+    order.push("Pancake: " + selectedPancake);
+    
 // selected toppings
     let toppings = document.querySelectorAll(".topping:checked");
     for(let i = 0; i < toppings.length; i++){
-        order.push(toppings[i].value);
+        order.push("Topping: " + toppings[i].value);
     }
 // selected extras
-    let extras = document.querySelectorAll(".extras:checked");
+    let extras = document.querySelectorAll(".extra:checked");
     for(let i = 0; i < extras.length; i++){
-        order.push(extras[i].value);
+        order.push("Extra: " + extras[i].value);
     }
 
 //selected delivery
-    let delivery = document.querySelectorAll("input[name='delivery']:checked");
+    let delivery = document.querySelector("input[name='delivery']:checked");
     if(delivery){
-        order.push("Delivery: " + delivery.parentNode.textContent.trim());
+        order.push("Delivery: " + delivery.value);
     }
 
 //display order
     if(order.length > 0){
-        document.getElementById("output").innerText = "Selected: " + order.join(", ");
+        document.getElementById("summaryText").innerHTML = "Selected:<br>" + order.join("<br>");
     }else{
-        document.getElementById("output").innerText = "No items selected.";
+        document.getElementById("summaryText").innerText = "No items selected.";
     }
 });   
