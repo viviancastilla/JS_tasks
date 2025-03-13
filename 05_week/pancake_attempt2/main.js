@@ -70,20 +70,25 @@ document.addEventListener("DOMContentLoaded", function(){
     loadOrders();
 });
 
-//Making the orderId to identify the order for the cheff
-let orderId = 0;
-function addOrder(){
-    let newOrderId = orderId;
-    orderId = (orderId + 1) % 100;
-    orderDetails.orderId = newOrderId;
+//Making the orderId to identify the order for the cheff, adding the orders
+let orderId = localStorage.getItem("orderId") ? parseInt(localStorage.getItem("orderId")) : 0;
+
+function addOrder(orderDetails){
+    updatedTotalPrice(); //Makes sure totalPrice is updated before saving it
+
+    orderDetails.totalPrice = totalPrice; //Save the updated total price in orderDetails
+
+    //Assign an ordr ID and save the order
+    orderDetails.orderId = orderId; 
     orders.push(orderDetails);
+    orderId++;
 
+    //Save order ID and orders to local storage
+    localStorage.setItem("orderId", orderId);
     saveOrders();
-
-    window.location.href = "allOrders.html";
 }
 
-//Final order
+//Final order button
 document.getElementById("seeOrder").addEventListener("click", function(){
     let order = [];
 
@@ -120,6 +125,8 @@ document.getElementById("seeOrder").addEventListener("click", function(){
         order.push("Delivery: " + delivery.value);
     }
 
+    updatedTotalPrice();
+    order.push("Total price: " + totalPrice + "€");
    //display order
     if(order.length > 0){
         document.getElementById("summaryText").innerHTML = "Selected:<br>" + order.join("<br>");
@@ -134,10 +141,22 @@ document.getElementById("seeOrder").addEventListener("click", function(){
         selectedPancake: selectedPancake,
         toppings: toppingList.length > 0 ? toppingList : ["None"],
         extras: extraList.length > 0 ? extraList : ["None"],
-        deliveryMethod: deliveryMethod,
+        deliveryMethod: delivery.value,
         totalPrice: totalPrice + "€",
         status: "waiting"
     };
 
     addOrder(orderDetails);
+
+    displayOrder();
 });  
+
+//Button to go to the allorders.html page
+document.getElementById("allOrders").addEventListener("click", function(){
+    window.location.href = "allOrders.html";
+});
+
+document.getElementById("submit").addEventListener("click", function(){
+    saveOrders();
+    window.location.href = "allOrdrs.html"
+});

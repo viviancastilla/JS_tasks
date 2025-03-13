@@ -1,0 +1,32 @@
+body{
+    background-color: darkgray;
+    top: 10;
+    color: white;
+    font-family:fantasy;
+    display: flex;
+}
+
+#ordersContainer{
+    position: relative;
+    top: 100px;
+    height: 400px;
+    width: 300px;
+    background-color: rgb(177, 221, 249);
+    border-radius: 25px;
+    padding: 20px;
+    margin: 50px;
+    text-align: justify;
+
+}
+
+#allOrders{
+    background-color: pink;
+    height: 100px;
+    width: 100px;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-family: fantasy;
+    position: relative;
+    right: 10px;
+}
