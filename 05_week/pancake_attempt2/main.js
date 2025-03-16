@@ -158,5 +158,5 @@ document.getElementById("allOrders").addEventListener("click", function(){
 
 document.getElementById("submit").addEventListener("click", function(){
     saveOrders();
-    window.location.href = "allOrdrs.html"
+    window.location.href = "allOrders.html"
 });

@@ -3,31 +3,60 @@ document.addEventListener("DOMContentLoaded", function(){
     let savedOrders = localStorage.getItem("orders");
     let orderDetails = document.getElementById("orderDetails");
     let noOrders = document.getElementById("noOrders");
-    let orderTeplate = document.getElementById("orderTemplate");
+    let orderTemplate = document.getElementById("orderTemplate");
 
     if(savedOrders){
         let orders = JSON.parse(savedOrders);
-        let orderText = document.getElementById("orderText");
 
         if(orders.length > 0){
             orders.forEach(order => {
 
                 let orderClone = orderTemplate.cloneNode(true);
 
-                document.getElementById("#orderId").textContent = "0rder" + order.orderId;
-                document.getElementById("#customerName").textContent = order.customerName;
-                document.getElementById("#pancake").textContent = order.selectedPancake;
-                document.getElementById("#toppings").textContent = order.toppings;
-                document.getElementById("#extras").textContent = order.extras;
-                document.getElementById("#delivery").textContent = order.deliveryMethod;
-                document.getElementById("#totalPrice").textContent = order.totalPrice;
-                document.getElementById("#status").textContent = order.status;
+                orderClone.querySelector("#orderId").textContent = "0rder #" + order.orderId;
+                orderClone.querySelector("#customerName").textContent = "Name: " + order.customerName;
+                orderClone.querySelector("#pancake").textContent = "Pancake: " + order.selectedPancake;
+                orderClone.querySelector("#toppings").textContent = "Topping: " + order.toppings;
+                orderClone.querySelector("#extras").textContent = "Extras: " + order.extras;
+                orderClone.querySelector("#delivery").textContent = "Delivery: " + order.deliveryMethod;
+                orderClone.querySelector("#totalPrice").textContent = "Totla price: " + order.totalPrice;
+                orderClone.querySelector("#.selectBox span").textContent = "Status: " + order.status;
 
+                orderClone.querySelector('.selectBox').classList.add(order.status.toLowerCase())
                 orderDetails.appendChild(orderClone);
             });
         }else{
-            let orderText = document.getElementById("orderText");
-            orderText.textContent = "No orders at the moment";
+            noOrders.textContent = "No orders at the moment";
         }
+    }
+});
+
+//Status color option
+document.querySelectorAll('.selectBox').forEach(selectBox =>{
+    selectBox.addEventListener('click', function(){
+        this.closest('.selectStatus').classList.toggle('open');
+    });
+});
+    
+
+document.querySelectorAll('.option').forEach(function(option){
+    option.addEventListener('click', function(){
+        let statusText = option.textContent;
+
+        let selectBox = this.closest('.selectStatus').querySelector('.selectBox');
+        selectBox.querySelector('span').textContent = "Status: " + statusText;
+        
+        selectBox.classList.remove('waiting', 'ready', 'delivered');
+        selectBox.classList.add(option.dataset.value);
+
+        this.closest('.selectStatus').classList.remove('open');
+    });
+});
+
+document.addEventListener('click', function(event){
+    if(!event.target.closest('.selectStatus')){
+        document.querySelectorAll('.selectStatus').forEach(selectStatus =>{
+            selectStatus.classList.remove('open');
+        });
     }
 });
