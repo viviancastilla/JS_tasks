@@ -38,7 +38,10 @@ const {title, ...extraInfo} = book;
 console.log(title, extraInfo);
 
 //Task 6
-function average(){
-    let numbers = [];
-    let sum = (...numbers);
+function average(...numbers){
+    let sum = numbers.reduce((sum, num) => sum + num, 0);
+    let total = numbers.length > 0 ? sum/numbers.length : 0
+
+    console.log(total);
 }
+average(10,20,30,40);
