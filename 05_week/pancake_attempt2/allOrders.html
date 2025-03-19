@@ -9,8 +9,8 @@
 <body>
     <h1>All orders</h1>
     <div id="ordersContainer">
-        <div id="orderDetails">
-                <div class="orderItem" id="orderTemplate">
+        <div id="order-list">
+                <div class="orderItem" id="orderTemplate" style="display: none;">
                     <div id="orderId">Order #</div><br>
                     <div id="customerName">Name:</div><br>
                     <div id="pancake">Pancake:</div><br>
@@ -22,7 +22,6 @@
                     <div class="selectStatus">
                         <div class="selectBox"></div>
                             <span>Status: Waiting</span>
-                            <i class="arrow"></i>
                     </div>
                     <ul class="options">
                         <li class="option" data-value="waiting">Waiting</li>

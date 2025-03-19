@@ -1,62 +1,41 @@
-//Loading the local storage to get the orders array and display it the all orders page
 document.addEventListener("DOMContentLoaded", function(){
-    let savedOrders = localStorage.getItem("orders");
-    let orderDetails = document.getElementById("orderDetails");
-    let noOrders = document.getElementById("noOrders");
+    let storedOrders = localStorage.getItem("orders");
+    let ordersContainer = document.getElementById("orders-list");
     let orderTemplate = document.getElementById("orderTemplate");
+    let noOrdersMessage = document.getElementById("noOrders");
 
-    if(savedOrders){
-        let orders = JSON.parse(savedOrders);
+    if(storedOrders){
+        let orders = JSON.parse(storedOrders);
 
-        if(orders.length > 0){
-            orders.forEach(order => {
+        ordersContainer.innerHTML = "";
 
-                let orderClone = orderTemplate.cloneNode(true);
+    if(orders.length > 0){
+        noOrdersMessage.style.display = "none";
 
-                orderClone.querySelector("#orderId").textContent = "0rder #" + order.orderId;
-                orderClone.querySelector("#customerName").textContent = "Name: " + order.customerName;
-                orderClone.querySelector("#pancake").textContent = "Pancake: " + order.selectedPancake;
-                orderClone.querySelector("#toppings").textContent = "Topping: " + order.toppings;
-                orderClone.querySelector("#extras").textContent = "Extras: " + order.extras;
-                orderClone.querySelector("#delivery").textContent = "Delivery: " + order.deliveryMethod;
-                orderClone.querySelector("#totalPrice").textContent = "Totla price: " + order.totalPrice;
-                orderClone.querySelector("#.selectBox span").textContent = "Status: " + order.status;
+        orders.forEach((order, index) => {
+            let orderClone = orderTemplate.cloneNode(true);
+            orderClone.style.display = "block";
+            orderClone.removeAttribute("id");
 
-                orderClone.querySelector('.selectBox').classList.add(order.status.toLowerCase())
-                orderDetails.appendChild(orderClone);
-            });
-        }else{
-            noOrders.textContent = "No orders at the moment";
-        }
+            orderClone.querySelector(".orderId").textContent = `Order #${index + 1}`;
+            orderClone.querySelector("#customerName").textContent = `Name: ${order.customerName || "unknown"}`;
+            orderClone.querySelector("#pancake").textContent = `Pancake: ${order.pancake || order.selectedPancake || "none"}`;
+            orderClone.querySelector("#toppings").textContent = `Toppings: ${order.toppings?.join(", ")}`;
+            orderClone.querySelector("#extras").textContent = `Extras: ${order.extras?.join(", ") || "none"}`;
+            orderClone.querySelector("#delivery").textContent = `Delivery: ${order.deliveryMethod || "not specified"}`;
+            orderClone.querySelector("#totalPrice").textContent = `Total price: ${order.totalPrice || "N/A"}`;
+
+            ordersContainer.appendChild(orderClone);
+        });
+    }else{
+        noOrdersMessage.style.display = "block";
     }
+}else{
+    noOrdersMessage.style.display = "block";
+}
 });
+
+
+
 
 //Status color option
-document.querySelectorAll('.selectBox').forEach(selectBox =>{
-    selectBox.addEventListener('click', function(){
-        this.closest('.selectStatus').classList.toggle('open');
-    });
-});
-    
-
-document.querySelectorAll('.option').forEach(function(option){
-    option.addEventListener('click', function(){
-        let statusText = option.textContent;
-
-        let selectBox = this.closest('.selectStatus').querySelector('.selectBox');
-        selectBox.querySelector('span').textContent = "Status: " + statusText;
-        
-        selectBox.classList.remove('waiting', 'ready', 'delivered');
-        selectBox.classList.add(option.dataset.value);
-
-        this.closest('.selectStatus').classList.remove('open');
-    });
-});
-
-document.addEventListener('click', function(event){
-    if(!event.target.closest('.selectStatus')){
-        document.querySelectorAll('.selectStatus').forEach(selectStatus =>{
-            selectStatus.classList.remove('open');
-        });
-    }
-});
